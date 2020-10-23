@@ -13,8 +13,6 @@ public class MyLinkedListTest {
         linkedList2.insert_to_tail(20);
         linkedList2.insert_to_tail(40);
         linkedList2.insert_to_tail(60);
-        linkedList2.insert_to_tail(80);
-        linkedList2.insert_to_tail(100);
         linkedList2.print();
     }
 }
