@@ -1,4 +1,4 @@
-package algorithm.binarytree;
+package binarytree;
 
 /**
  * @author zengfanyu

@@ -1,4 +1,4 @@
-package algorithm.linkedList;
+package linkedList;
 
 /**
  * @author zengfanyu
