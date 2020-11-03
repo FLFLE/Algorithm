@@ -1,2 +1,2 @@
 # Algorithm
-在MAC和Windows上同步自己的算法题
+记录一下做的算法题
