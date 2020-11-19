@@ -10,6 +10,7 @@ public class Calculate {
 
     Expression expression = new Expression();
     String str = "";     //表达式的内容
+    String[] tempStr;
     JFrame frame;
     JTextField textField;
     JPanel panel1, panel2, panel3;
@@ -62,7 +63,7 @@ public class Calculate {
         leftBrackets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                str = str + "(" + " ";
+                str = str + "(";
                 textField.setText(str);
             }
         });
@@ -71,7 +72,7 @@ public class Calculate {
         rightBrackets.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                str = str + " " + ")";
+                str = str + ")";
                 textField.setText(str);
             }
 
@@ -81,9 +82,13 @@ public class Calculate {
         postOrderExpression.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                str = expression.getPostOrderExpression(str)[0].toString();
+                StringBuilder stringBuilder = new StringBuilder();
+                tempStr = expression.getSuffixExpression(expression.splitExpression(str));
+                for (String temp : tempStr) {
+                    stringBuilder.append(temp);
+                }
+                str = stringBuilder.toString();
                 textField.setText(str);
-                str = "";
             }
         });
 
@@ -99,13 +104,17 @@ public class Calculate {
                     if (actionButton.equals("+") || actionButton.equals("-")
                             || actionButton.equals("*")
                             || actionButton.equals("/")) {
-                        str = str + " " + actionButton + " ";
+                        str = str + actionButton;
                         //当点击的按钮是等号时，计算结果，将flag赋值为0，并清空str
                     } else if (actionButton.equals("=")) {
-                        str = expression.calculate(expression.getPostOrderExpression(str)[1].toString());
-                        textField.setText(str);
-                        str = "";
-                        flag = 0;
+                        try {
+                            tempStr = expression.getSuffixExpression(expression.splitExpression(str));
+                            textField.setText(str + "=" + expression.calculate(tempStr));
+                            str = "";
+                            flag = 0;
+                        } catch (Exception exception) {
+                            System.out.println("表达式不合法！");
+                        }
                     } else {
                         str = str + actionButton;
                     }
